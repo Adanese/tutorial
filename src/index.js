@@ -1,17 +1,68 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Children, Component } from "react";
+import ReactDom from "react-dom";
+// CSS
+import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// set up vars
+const books = [
+  {
+    id: 1,
+    img: "https://source.unsplash.com/user/erondu/300x300",
+    author: "demo_author_1",
+    title: "demo_title_1",
+  },
+  {
+    id: 2,
+    img: "https://source.unsplash.com/user/erondu/300x900",
+    author: "demo_author_2",
+    title: "demo_title_2",
+  },
+];
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//Best Bookselling website React me
+function BookList() {
+  return (
+    <section className="booklist">
+      {books.map((book, index) => {
+        //console.log(book);
+        return <Book key={book.id} {...book}></Book>;
+      })}
+    </section>
+  );
+}
+
+//Define CLick Handler
+const clickHandler = () => {
+  alert("Hello World");
+};
+
+//Define complexExample
+const complexExample = (author) => {
+  console.log(author);
+};
+
+//2nd Component Component
+//Explicit return statement
+const Book = (props) => {
+  console.log(props);
+  const { img, title, author } = props;
+  return (
+    <article className="book">
+      <img src={img} alt="" />
+      <h1 onClick={clickHandler}>{title}</h1>
+      <h>{author}</h>
+
+      {/* <h4>{props.children}</h4> */}
+      {/* //Adding button */}
+      <button type="button" onClick={clickHandler}>
+        Click Me
+      </button>
+      {/* //Second button More COmplex example */}
+      <button type="button" onClick={() => complexExample(author)}>
+        More Complex Example
+      </button>
+    </article>
+  );
+};
+
+ReactDom.render(<BookList />, document.getElementById("root"));
