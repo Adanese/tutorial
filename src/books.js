@@ -1,4 +1,4 @@
-const books = [
+export const books = [
   {
     id: 1,
     img: "https://source.unsplash.com/user/erondu/300x300",
